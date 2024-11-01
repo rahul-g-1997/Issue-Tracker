@@ -1,0 +1,27 @@
+{
+  "name": "issue-tracker",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Issue tracker Coding test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rahul-g-1997/Issue-Tracker.git"
+  },
+  "keywords": [
+    "Issue-Tracker"
+  ],
+  "author": "Rahul Gaydhane",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rahul-g-1997/Issue-Tracker/issues"
+  },
+  "homepage": "https://github.com/rahul-g-1997/Issue-Tracker#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1"
+  }
+}
