@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Meta tags for character set and viewport settings -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Link to custom stylesheet for additional styles -->
     <link rel="stylesheet" href="/css/home.css" />
+    
+    <!-- Include Tailwind CSS framework via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Title of the page -->
     <title>Issue-Tracker</title>
+    
     <style>
+      /* Custom styles to hide the scrollbar globally */
       body {
         ::-webkit-scrollbar {
           display: none;
@@ -14,8 +23,17 @@
       }
     </style>
   </head>
-  <body class="bg-gray-200">
-    <%-include('_navbar') %> <%-include('_projects') %>
-    <%-include('_footer.ejs') %>
+  
+  <body class="bg-gray-200"> <!-- Body with Tailwind background color -->
+    
+    <!-- Include the Navbar EJS template -->
+    <%- include('_navbar') %>
+    
+    <!-- Include the Projects section EJS template -->
+    <%- include('_projects') %>
+    
+    <!-- Include the Footer EJS template -->
+    <%- include('_footer.ejs') %>
+    
   </body>
 </html>
