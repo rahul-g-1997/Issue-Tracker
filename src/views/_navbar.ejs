@@ -72,25 +72,43 @@
       </button>
 
       <dialog id="dialog">
-        <h2>Add Project!</h2>
+        <h2>Add Project</h2>
         <form action="/projects/create" method="post">
-          <div>
-            <input type="text" name="name" placeholder="Project Name" />
+          <div class="input-group">
+            <label for="project-name">Project Name</label>
             <input
+              id="project-name"
               type="text"
-              name="description"
-              placeholder="Project Description"
+              name="name"
+              placeholder="Enter project name"
+              required
             />
-            <input type="text" name="author" placeholder="Author name" />
+
+            <label for="description">Project Description</label>
+            <textarea
+              id="description"
+              name="description"
+              placeholder="Enter project description"
+              rows="3"
+              required
+            ></textarea>
+
+            <label for="author">Author Name</label>
+            <input
+              id="author"
+              type="text"
+              name="author"
+              placeholder="Enter author name"
+              required
+            />
           </div>
-          <button
-            class="text-white bg-green-400 hover:bg-green-400 focus:ring-4 focus:outline-none focus:ring-green-400 font-medium rounded-lg md:mr-0 text-sm px-2 py-3 dark:bg-green-400 dark:hover:bg-green-400 dark:focus:ring-green-400"
-            type="submit"
-          >
-            Add Projects!
-          </button>
+          <button type="submit" class="primary">Add Project</button>
         </form>
-        <button onclick="window.dialog.close();" aria-label="close" class="x">
+        <button
+          onclick="document.getElementById('dialog').close();"
+          aria-label="Close dialog"
+          class="close-button"
+        >
           ❌
         </button>
       </dialog>

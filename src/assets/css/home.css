@@ -1,109 +1,114 @@
-/* Importing Google Font 'Poppins' */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
-/* Defining CSS root variables */
+/* Root Variables */
 :root {
-	/* Primary color in RGB format for easy opacity adjustments */
-	--vs-primary: 29 92 255;
+	--primary-color: 29, 92, 255;
+	/* Primary color in RGB */
+	--background-color: 255, 255, 255;
+	--button-hover: 60, 157, 140;
+	--font-color: #333;
 }
 
-/* Dialog Component Styles */
+/* Dialog Styles */
 dialog {
-	/* Dialog styling with padding, max width, and rounded corners */
-	padding: 1rem 3rem;
+	padding: 2rem;
 	background: white;
-	max-width: 400px;
-	padding-top: 2rem;
-	border-radius: 20px;
+	max-width: 450px;
+	border-radius: 12px;
 	border: 0;
-	box-shadow: 0 5px 30px 0 rgb(0 0 0 / 10%);
-	/* Animation effect for dialog appearance */
-	animation: fadeIn 1s ease both;
+	box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+	animation: fadeIn 0.8s ease both;
+	font-family: "Poppins", sans-serif;
 
-	/* Styling for dialog backdrop */
+	/* Backdrop Styles */
 	&::backdrop {
-		/* Backdrop fade-in effect and blurred background */
-		animation: fadeIn 1s ease both;
-		background: rgb(255 255 255 / 40%);
-		z-index: 2;
-		backdrop-filter: blur(20px);
+		animation: fadeIn 0.8s ease both;
+		background: rgba(0, 0, 0, 0.5);
+		backdrop-filter: blur(4px);
 	}
 
-	/* Close button styling within the dialog */
-	.x {
-		/* Grayscale filter for the close button, positioned in the top right */
-		filter: grayscale(1);
-		border: none;
-		background: none;
-		position: absolute;
-		top: 15px;
-		right: 10px;
-		transition: ease filter, transform 0.3s;
-		cursor: pointer;
-		transform-origin: center;
-
-		/* Hover effect to remove grayscale and slightly scale up */
-		&:hover {
-			filter: grayscale(0);
-			transform: scale(1.1);
-		}
-	}
-
-	/* Dialog title styling */
+	/* Title */
 	h2 {
 		font-weight: 600;
-		font-size: 2rem;
-		padding-bottom: 1rem;
+		font-size: 1.8rem;
+		color: rgb(var(--primary-color));
+		text-align: center;
+		margin-bottom: 1rem;
 	}
 
-	/* Paragraph styling within dialog */
-	p {
+	/* Form Styling */
+	form {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	/* Input Group Styling */
+	.input-group {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	label {
+		font-size: 0.9rem;
+		color: var(--font-color);
+		margin-bottom: 0.3rem;
+	}
+
+	input,
+	textarea {
+		padding: 0.8rem;
+		border: 1px solid rgba(0, 0, 0, 0.2);
+		border-radius: 8px;
 		font-size: 1rem;
-		line-height: 1.3rem;
-		padding: 0.5rem 0;
+		transition: border-color 0.2s;
+	}
 
-		/* Link color within paragraph */
-		a {
-			&:visited {
-				color: rgb(var(--vs-primary));
-			}
-		}
+	input:focus,
+	textarea:focus {
+		outline: none;
+		border-color: rgb(var(--primary-color));
+		box-shadow: 0 0 0 2px rgba(var(--primary-color), 0.3);
+	}
+
+	/* Close Button */
+	.close-button {
+		position: absolute;
+		top: 15px;
+		right: 15px;
+		background: none;
+		border: none;
+		font-size: 1.5rem;
+		cursor: pointer;
+		transition: transform 0.3s;
+	}
+
+	.close-button:hover {
+		transform: scale(1.2);
 	}
 }
 
-/* General Body Styling */
-body {
-	/* Using the 'Poppins' font and a full background */
-	display: flex;
-	font-family: Poppins, sans-serif;
-	background-size: cover;
-}
-
-/* Primary Button Styles */
+/* Submit Button */
 button.primary {
-	/* Button layout, color, and background with padding and rounded corners */
-	display: inline-block;
-	font-size: 0.8rem;
-	color: #fff !important;
-	background: rgb(var(--vs-primary) / 100%);
-	padding: 13px 25px;
-	border-radius: 17px;
-	transition: background-color 0.1s ease;
-	box-sizing: border-box;
-	transition: all 0.25s ease;
-	border: 0;
+	font-size: 1rem;
+	color: #fff;
+	background-color: rgb(var(--primary-color));
+	padding: 0.8rem 1.5rem;
+	border-radius: 8px;
+	border: none;
 	cursor: pointer;
-	/* Button shadow for depth */
-	box-shadow: 0 10px 20px -10px rgb(var(--vs-primary) / 50%);
-
-	/* Hover effect for button shadow and upward movement */
-	&:hover {
-		box-shadow: 0 20px 20px -10px rgb(var(--vs-primary) / 50%);
-		transform: translateY(-5px);
-	}
+	transition: background-color 0.3s ease, transform 0.3s ease;
+	width: 100%;
+	font-weight: 600;
 }
 
-/* Fade-in Animation */
+button.primary:hover {
+	background-color: rgb(var(--button-hover));
+	transform: translateY(-2px);
+}
+
+/* Fade-In Animation */
 @keyframes fadeIn {
 	from {
 		opacity: 0;
@@ -113,3 +118,15 @@ button.primary {
 		opacity: 1;
 	}
 }
+
+/* Body Styling */
+body {
+	font-family: "Poppins", sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background-color: rgb(var(--background-color));
+	margin: 0;
+}
+

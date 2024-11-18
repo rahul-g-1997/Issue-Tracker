@@ -73,9 +73,9 @@
       </button>
 
       <dialog id="Fillter">
-        <h2 class="text-2xl">Fillter Issues!</h2>
+        <br />
+        <h2>Fillter Issues!</h2>
         <form action="/" method="get" id="filter-issue-form">
-          <!-- labels -->
           <div class="row mb-3 m-auto">
             <div class="col-sm-8">
               <% for( let label of project.labels) { %>
@@ -121,14 +121,13 @@
               </div>
             </div>
           </div>
-          <button
-            class="text-white bg-green-400 hover:bg-green-400 focus:ring-1 focus:outline-none focus:ring-black font-medium rounded-lg md:mr-0 text-sm px-2 py-2 dark:bg-green-400 dark:hover:bg-green-400 dark:focus:ring-black"
-            type="submit"
-          >
-            Fillter Issues!
-          </button>
+          <button type="submit" class="primary">Fillter Issues!</button>
         </form>
-        <button onclick="window.Fillter.close();" aria-label="close" class="x">
+        <button
+          onclick="window.Fillter.close();"
+          aria-label="Close dialog"
+          class="close-button"
+        >
           ❌
         </button>
       </dialog>
@@ -147,53 +146,36 @@
       </button>
 
       <dialog id="Search">
+        <br />
         <h2>Search Issues!</h2>
-        <form
-          class="border border-light border-3"
-          action="/"
-          method="get"
-          id="search-issue-form"
-        >
-          <div class="row mb-3 m-auto">
-            <label for="titlelabel" class="col-sm-4 col-form-label"
-              >Title</label
-            >
-            <div class="col-sm-8">
-              <input
-                type="text"
-                name="tie"
-                placeholder="Search by title.."
-                class="form-control"
-                id="titlelabel"
-              />
-            </div>
-          </div>
-          <div class="row mb-3 m-auto">
-            <label for="desclabel" class="col-sm-4 col-form-label"
-              >Description</label
-            >
-            <div class="col-sm-8">
-              <input
-                type="text"
-                name="des"
-                placeholder="Search by description..."
-                class="form-control"
-                id="authorlabel"
-              />
-            </div>
-          </div>
+        <form action="/" method="get" id="search-issue-form">
+          <div class="input-group">
+            <label for="titlelabel">Title</label>
+            <input
+              id="titlelabel"
+              type="text"
+              name="tie"
+              placeholder="Search by title.."
+              required
+            />
 
-          <div class="modal-footer">
-            <button
-              class="text-white bg-green-400 hover:bg-green-400 focus:ring-1 focus:outline-none focus:ring-black font-medium rounded-lg md:mr-0 text-sm px-2 py-2 dark:bg-green-400 dark:hover:bg-green-400 dark:focus:ring-black"
-              type="submit"
-            >
-              Search Issues!
-            </button>
+            <label for="desclabel">Description</label>
+            <textarea
+              name="des"
+              placeholder="Search by description..."
+              class="form-control"
+              id="authorlabel"
+              rows="3"
+              required
+            ></textarea>
           </div>
+          <button type="submit" class="primary">Search Issues!</button>
         </form>
-
-        <button onclick="window.Search.close();" aria-label="close" class="x">
+        <button
+          onclick="window.Search.close();"
+          aria-label="Close dialog"
+          class="close-button"
+        >
           ❌
         </button>
       </dialog>
@@ -212,23 +194,24 @@
       </button>
 
       <a
-  href="/"
-  class="text-white ml-2 bg-black hover:bg-black focus:ring-1 focus:outline-none focus:ring-black font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-black dark:hover:bg-black dark:focus:ring-black"
->
-  Back
-</a>
+        href="/"
+        class="text-white ml-2 bg-black hover:bg-black focus:ring-1 focus:outline-none focus:ring-black font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-black dark:hover:bg-black dark:focus:ring-black"
+      >
+        Back
+      </a>
 
       <dialog id="dialog">
-        <h2 class="text-2xl">Create Issues!</h2>
+        <br />
+        <h2>Create Issues!</h2>
         <form action="/projects/<%=project._id%>" method="post">
-          <input type="text" name="title" placeholder="Issue Title" required/>
+          <input type="text" name="title" placeholder="Issue Title" required />
           <input
             type="text"
             name="description"
             placeholder="Issue Description"
             required
           />
-          <input type="text" name="author" placeholder="Author name" required/>
+          <input type="text" name="author" placeholder="Author name" required />
           <!-- <input type="text" name="labels" placeholder="labels" /> -->
 
           <!-- labels -->
@@ -244,7 +227,6 @@
                 type="checkbox"
                 value="Bug"
                 id="bug"
-                
               />
               <label class="form-check-label" for="bug"> Duplicate </label
               ><br /><input
@@ -284,14 +266,13 @@
               <label class="form-check-label" for="duplicate"> Bug </label>
             </div>
           </div>
-          <button
-            class="text-white bg-green-400 hover:bg-green-400 focus:ring-1 focus:outline-none focus:ring-black font-medium rounded-lg md:mr-0 text-sm px-2 py-3 dark:bg-green-400 dark:hover:bg-green-400 dark:focus:ring-black"
-            type="submit"
-          >
-            Add Issues!
-          </button>
+          <button class="primary" type="submit">Add Issues!</button>
         </form>
-        <button onclick="window.dialog.close();" aria-label="close" class="x">
+        <button
+          onclick="window.dialog.close();"
+          aria-label="Close dialog"
+          class="close-button"
+        >
           ❌
         </button>
       </dialog>
