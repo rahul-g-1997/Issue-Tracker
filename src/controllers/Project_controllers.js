@@ -14,10 +14,10 @@ export const createProject = async (req, res) => {
     });
 
     // Redirect to the previous page upon successful creation
-    res.redirect("back");
+    res.redirectBack();
   } catch (error) {
     console.log(`Error in creating project: ${error}`); // Log errors, if any
-    return res.redirect("back"); // Redirect back on error
+    return res.redirectBack(); // Redirect back on error
   }
 };
 
@@ -33,10 +33,10 @@ export const Isuues = async (req, res) => {
     const issues = new Issue({ title, description, author, labels });
     await issues.save();
 
-    res.redirect("back"); // Redirect to the previous page on success
+    res.redirectBack(); // Redirect to the previous page on success
   } catch (error) {
     console.log(`Error in getting project issues: ${error}`); // Log errors
-    return res.redirect("back"); // Redirect back on error
+    return res.redirectBack(); // Redirect back on error
   }
 };
 
@@ -58,10 +58,10 @@ export const projectDetails = async (req, res) => {
         req: req, // Pass req object if needed for session/user data
       });
     }
-    return res.redirect("back"); // Redirect back if project not found
+    return res.redirectBack(); // Redirect back if project not found
   } catch (error) {
     console.log(`Error in getting project details: ${error}`); // Log errors
-    return res.redirect("back"); // Redirect back on error
+    return res.redirectBack(); // Redirect back on error
   }
 };
 
@@ -103,12 +103,12 @@ export const createIssue = async (req, res) => {
       // Save the updated project document
       await project.save();
 
-      return res.redirect("back"); // Redirect to the previous page on success
+      return res.redirectBack(); // Redirect to the previous page on success
     } else {
-      return res.redirect("back"); // Redirect back if project not found
+      return res.redirectBack(); // Redirect back if project not found
     }
   } catch (error) {
     console.log(`Error in getting project issues: ${error}`); // Log errors
-    return res.redirect("back"); // Redirect back on error
+    return res.redirectBack(); // Redirect back on error
   }
 };
