@@ -3,66 +3,218 @@
   <head>
     <title>ProjectDetails</title>
     <script src="https://cdn.tailwindcss.com"></script>
-   
   </head>
   <body class="bg-gray-100 text-gray-800">
     <%- include('_issue_navbar') %> <% if (project.issues.length >= 1) { %>
     <div class="flex flex-col w-full justify-center min-h-screen py-10">
       <div
-        class="relative flex flex-col md:flex-row md:space-x-5 space-y-6 md:space-y-0 rounded-lg shadow-lg p-6 bg-white max-w-2xl mx-auto border border-gray-300"
+        class="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-6 border border-gray-300"
       >
         <!-- Project Title Section -->
-        <div
-          class="w-full md:w-1/3 flex justify-center items-center mb-4 text-3xl font-semibold text-gray-800"
-        >
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">
           <%= project.name %>
+        </h1>
+
+        <!-- Filters Section -->
+        <div class="mb-6 flex flex-wrap gap-4 w-full">
+          <!-- Author Filter -->
+          <div class="flex-grow">
+            <select
+              id="authorFilter"
+              class="border border-gray-300 rounded-lg px-3 py-2 w-full"
+            >
+              <option value="">Filter by Author</option>
+              <% let authors = [...new Set(project.issues.map(issue =>
+              issue.author))]; %> <% for (let author of authors) { %>
+              <option value="<%= author %>"><%= author %></option>
+              <% } %>
+            </select>
+          </div>
+
+          <!-- Labels Filter with Multi-Select -->
+          <div class="flex-grow relative">
+            <div
+              id="labelsDropdown"
+              class="border border-gray-300 rounded-lg px-3 py-2 w-full cursor-pointer relative bg-white"
+            >
+              <span id="selectedLabelsText" class="text-gray-700">
+                Select Labels
+              </span>
+              <div
+                id="dropdownMenu"
+                class="absolute bg-white border border-gray-300 rounded-lg shadow-lg w-full hidden z-10"
+              >
+                <% let allLabels = [...new Set(project.issues.flatMap(issue =>
+                issue.labels))]; %> <% for (let label of allLabels) { %>
+                <div class="p-2">
+                  <label class="inline-flex items-center">
+                    <input
+                      type="checkbox"
+                      value="<%= label %>"
+                      class="labelCheckbox mr-2"
+                    />
+                    <%= label %>
+                  </label>
+                </div>
+                <% } %>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Issue Details Section -->
-        <div class="w-full md:w-2/3 flex flex-col space-y-4">
-          <div class="flex justify-between items-center mb-4">
-            <p class="text-lg font-medium text-gray-700 hidden md:block">
-              Severity:
-            </p>
-            <span
-              class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full"
-              >High</span
-            >
-          </div>
+        <!-- Search Bar -->
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Search by Title or Description"
+          class="border border-gray-300 rounded-lg px-3 py-2 min-w-full md:w-1/2 mb-6"
+        />
 
-          <% for (let issue of project.issues) { if ((!req.query.author ||
-          issue.author === req.query.author) && (!req.query.labels ||
-          issue.labels.includes(req.query.labels))) { %>
-
-          <!-- Issue Title -->
-          <h3 class="text-xl md:text-2xl font-bold text-gray-800">
-            <span class="text-gray-600 font-normal">Title:</span> <%=
-            issue.title %>
-          </h3>
-
-          <!-- Issue Author -->
-          <p class="text-sm text-green-600 font-medium">
-            Author: <%= issue.author %>
-          </p>
-
-          <!-- Issue Labels -->
-          <p class="text-yellow-500 text-sm font-semibold">
-            Labels: <%= issue.labels %>
-          </p>
-
-          <!-- Issue Description -->
-          <div class="my-2 text-gray-700">
-            <p class="md:text-base text-sm leading-relaxed">
-              <%= issue.description %>
-            </p>
-          </div>
-
-          <!-- Divider -->
-          <div class="border-t border-gray-200 my-4"></div>
-          <% } } %>
+        <!-- Issues Table -->
+        <div class="overflow-x-auto">
+          <table
+            class="min-w-full bg-white border border-gray-200"
+            id="issuesTable"
+          >
+            <thead class="bg-gray-100 border-b">
+              <tr>
+                <th class="text-left py-3 px-4 font-medium text-gray-600">
+                  Title
+                </th>
+                <th class="text-left py-3 px-4 font-medium text-gray-600">
+                  Author
+                </th>
+                <th class="text-left py-3 px-4 font-medium text-gray-600">
+                  Labels
+                </th>
+                <th class="text-left py-3 px-4 font-medium text-gray-600">
+                  Description
+                </th>
+                <th class="text-left py-3 px-4 font-medium text-gray-600">
+                  Severity
+                </th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <% for (let issue of project.issues) { %>
+              <tr class="border-b">
+                <td class="py-3 px-4 text-gray-700 text-sm">
+                  <%= issue.title %>
+                </td>
+                <td class="py-3 px-4 text-gray-700 text-sm">
+                  <%= issue.author %>
+                </td>
+                <td class="py-3 px-4 text-yellow-500 text-sm">
+                  <%= issue.labels.join(", ") %>
+                </td>
+                <td class="py-3 px-4 text-gray-700 text-sm">
+                  <%= issue.description %>
+                </td>
+                <td class="py-3 px-4">
+                  <span
+                    class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full"
+                  >
+                    High
+                  </span>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
     <% } %> <%- include('_footer.ejs') %>
+
+    <script>
+          const issues = <%- JSON.stringify(project.issues) %>;
+
+          const authorFilter = document.getElementById("authorFilter");
+          const labelsDropdown = document.getElementById("labelsDropdown");
+          const dropdownMenu = document.getElementById("dropdownMenu");
+          const selectedLabelsText = document.getElementById("selectedLabelsText");
+          const labelCheckboxes = document.querySelectorAll(".labelCheckbox");
+          const searchInput = document.getElementById("searchInput");
+          const tableBody = document.getElementById("tableBody");
+
+          // Function to filter and search
+          function filterIssues() {
+            const authorValue = authorFilter.value.toLowerCase();
+            const selectedLabels = Array.from(labelCheckboxes)
+              .filter((cb) => cb.checked)
+              .map((cb) => cb.value.toLowerCase());
+            const searchQuery = searchInput.value.toLowerCase();
+
+            const filteredIssues = issues.filter((issue) => {
+              const matchesAuthor =
+                authorValue === "" || issue.author.toLowerCase() === authorValue;
+             const matchesLabels =
+      selectedLabels.length === 0 ||
+      selectedLabels.some((label) =>
+        issue.labels.map((l) => l.toLowerCase()).includes(label)
+      );
+
+              const matchesSearch =
+                issue.title.toLowerCase().includes(searchQuery) ||
+                issue.description.toLowerCase().includes(searchQuery);
+
+              return matchesAuthor && matchesLabels && matchesSearch;
+            });
+
+            renderTable(filteredIssues);
+          }
+
+          // Function to render the table
+          function renderTable(issues) {
+            tableBody.innerHTML = issues
+              .map(
+                (issue) => `
+                <tr class="border-b">
+                  <td class="py-3 px-4 text-gray-700 text-sm">${issue.title}</td>
+                  <td class="py-3 px-4 text-gray-700 text-sm">${issue.author}</td>
+                  <td class="py-3 px-4 text-yellow-500 text-sm">${issue.labels.join(", ")}</td>
+                  <td class="py-3 px-4 text-gray-700 text-sm">${issue.description}</td>
+                  <td class="py-3 px-4">
+                    <span class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">High</span>
+                  </td>
+                </tr>
+              `
+              )
+              .join("");
+          }
+
+          // Toggle dropdown visibility
+          labelsDropdown.addEventListener("click", () => {
+            dropdownMenu.classList.toggle("hidden");
+          });
+
+          // Close dropdown on outside click
+          document.addEventListener("click", (e) => {
+            if (!labelsDropdown.contains(e.target)) {
+              dropdownMenu.classList.add("hidden");
+            }
+          });
+
+          // Update selected labels and trigger filter
+          labelCheckboxes.forEach((checkbox) => {
+            checkbox.addEventListener("change", () => {
+              const selectedLabels = Array.from(labelCheckboxes)
+                .filter((cb) => cb.checked)
+                .map((cb) => cb.value);
+              selectedLabelsText.textContent =
+                selectedLabels.length > 0
+                  ? selectedLabels.join(", ")
+                  : "Select Labels";
+              filterIssues();
+            });
+          });
+
+          // Event listeners for filters and search
+          authorFilter.addEventListener("change", filterIssues);
+          searchInput.addEventListener("input", filterIssues);
+
+          // Initial render
+          renderTable(issues);
+    </script>
   </body>
 </html>
