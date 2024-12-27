@@ -27,8 +27,6 @@
     "ejs": "^3.1.10",
     "express": "^4.21.1",
     "issue-tracker": "file:",
-    "mongodb": "^6.10.0",
-    "mongoose": "^8.9.2",
-    "nodemon": "^3.1.7"
+    "mongoose": "^8.9.2"
   }
 }
