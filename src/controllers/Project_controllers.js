@@ -52,7 +52,6 @@ export const projectDetails = async (req, res) => {
       return res.render("projectDetails", {
         title: "Project Details",
         project,
-        req: req,
       });
     }
     return res.redirectBack();
