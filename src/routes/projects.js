@@ -17,7 +17,7 @@ app.get("/:id", projectDetails);
 // Route to create an issue for a specific project
 app.post("/:id", createIssue);
 
-console.log("project router loaded"); // Logging to confirm the project router is loaded
+console.log("project router loaded"); 
 
 // Exporting the router so it can be used in the main app file
 export default app;

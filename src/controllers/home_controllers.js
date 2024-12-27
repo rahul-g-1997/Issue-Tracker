@@ -9,8 +9,8 @@ const home = async (req, res) => {
 
     // Render the 'home' view template with the retrieved projects and a page title
     return res.render("home", {
-      title: "Issue-Tracker", // Page title
-      projects, // Pass the retrieved projects to the view
+      title: "Issue-Tracker", 
+      projects, 
     });
   } catch (err) {
     // Log any error encountered during the database query or rendering

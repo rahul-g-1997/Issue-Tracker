@@ -5,7 +5,6 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { attachRedirectBack } from "./middleware/redirectBack.js";
 
-// Define __dirname in ES6 modules (since it's not directly available in ES6)
 // This converts the file URL to a path and gets the directory name
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

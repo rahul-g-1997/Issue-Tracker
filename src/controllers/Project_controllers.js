@@ -4,7 +4,6 @@ import Issue from "../models/issue.js";
 
 // Function to create a new project
 export const createProject = async (req, res) => {
-  console.log(req.body); // Log the request body for debugging purposes
   try {
     // Using Project.create() to add a new project document to the database
     await Project.create({
@@ -16,8 +15,8 @@ export const createProject = async (req, res) => {
     // Redirect to the previous page upon successful creation
     res.redirectBack();
   } catch (error) {
-    console.log(`Error in creating project: ${error}`); // Log errors, if any
-    return res.redirectBack(); // Redirect back on error
+    console.log(`Error in creating project: ${error}`);
+    return res.redirectBack();
   }
 };
 
@@ -33,10 +32,10 @@ export const Isuues = async (req, res) => {
     const issues = new Issue({ title, description, author, labels });
     await issues.save();
 
-    res.redirectBack(); // Redirect to the previous page on success
+    res.redirectBack();
   } catch (error) {
-    console.log(`Error in getting project issues: ${error}`); // Log errors
-    return res.redirectBack(); // Redirect back on error
+    console.log(`Error in getting project issues: ${error}`);
+    return res.redirectBack();
   }
 };
 
@@ -48,20 +47,18 @@ export const projectDetails = async (req, res) => {
       path: "issues",
     });
 
-    console.log(project); // Log project details for debugging
-
     // Render the 'projectDetails' view if project exists
     if (project) {
       return res.render("projectDetails", {
         title: "Project Details",
         project,
-        req: req, // Pass req object if needed for session/user data
+        req: req,
       });
     }
-    return res.redirectBack(); // Redirect back if project not found
+    return res.redirectBack();
   } catch (error) {
-    console.log(`Error in getting project details: ${error}`); // Log errors
-    return res.redirectBack(); // Redirect back on error
+    console.log(`Error in getting project details: ${error}`);
+    return res.redirectBack();
   }
 };
 
@@ -103,12 +100,12 @@ export const createIssue = async (req, res) => {
       // Save the updated project document
       await project.save();
 
-      return res.redirectBack(); // Redirect to the previous page on success
+      return res.redirectBack();
     } else {
-      return res.redirectBack(); // Redirect back if project not found
+      return res.redirectBack();
     }
   } catch (error) {
-    console.log(`Error in getting project issues: ${error}`); // Log errors
-    return res.redirectBack(); // Redirect back on error
+    console.log(`Error in getting project issues: ${error}`);
+    return res.redirectBack();
   }
 };
