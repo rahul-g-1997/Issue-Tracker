@@ -20,25 +20,6 @@ export const createProject = async (req, res) => {
   }
 };
 
-// Function to create a new issue in the database
-export const Isuues = async (req, res) => {
-  try {
-    const { title, description, author, labels } = req.body;
-    console.log(
-      `Title: ${title}, Description: ${description}, Author: ${author}, Labels: ${labels}`
-    );
-
-    // Create and save a new issue document
-    const issues = new Issue({ title, description, author, labels });
-    await issues.save();
-
-    res.redirectBack();
-  } catch (error) {
-    console.log(`Error in getting project issues: ${error}`);
-    return res.redirectBack();
-  }
-};
-
 // Function to retrieve project details, including issues
 export const projectDetails = async (req, res) => {
   try {
